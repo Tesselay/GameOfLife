@@ -37,13 +37,15 @@ void MainMenu::main() {
         if (user_input.toInt() == 1) {
             // START
             GameLogic game_logic;
-//            while (true) {
+            while (true) {
 
-//                for ( int i {0}; i < 10; i++) {
-//                    Utilities::delay(1);
-//                }
-//                break;
-//            }
+                for ( int i {0}; i < 10; i++) {
+                    game_logic.next_step();
+                    Utilities::delay(1);
+                    Utilities::clear_screen();
+                }
+                break;
+            }
         }
         else if (user_input.toInt() == 2) {
             // UNIT TEST

@@ -24,6 +24,8 @@ QList<QStringList> Playfield::field_constructor(int field_size) {
 
 void Playfield::field_printer(QList<QStringList> field) {
     QTextStream out(stdout);
+
+    out << "Blinker\n";
     for ( int i {0}; i < field.size(); i++) {
 
         for ( int j {0}; j < field[0].size(); j++) {
