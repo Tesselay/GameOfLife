@@ -18,7 +18,7 @@ void Utilities::delay(int seconds) {
 void Utilities::clear_screen() {
 #ifdef _WIN32
     QProcess::execute("cmd /c cls");
-#elif defined __unix__ || defined __linux__ || __APPLE__
+#elif defined __unix__ || defined __linux__ || defined __APPLE__
     QProcess::execute("clear");
 
 #endif
