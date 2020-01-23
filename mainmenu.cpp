@@ -1,5 +1,5 @@
 #include "mainmenu.h"
-#include "playfield.h"
+#include "gamelogic.h"
 #include "utilities.h"
 #include <QString>
 #include <QTextStream>
@@ -35,35 +35,22 @@ void MainMenu::main() {
 
         Utilities::clear_screen();
         if (user_input.toInt() == 1) {
-            out << "Start\n";
-            out.flush();
+            // START
+            GameLogic game_logic;
+//            while (true) {
 
-            Playfield playfield;
-            QString user_input_start {1};
-            while (true) {
-
-                QString test {};
-                for ( int i {0}; i < 10; i++) {
-                    playfield.field_printer();
-                    Utilities::delay(1);
-                }
-
-
-
-                break;
-            }
-
-
-
-
+//                for ( int i {0}; i < 10; i++) {
+//                    Utilities::delay(1);
+//                }
+//                break;
+//            }
         }
         else if (user_input.toInt() == 2) {
-            out << "Unit Test\n";
-            out.flush();
+            // UNIT TEST
         }
         else if (user_input.toInt() == 3) {
+            // CLOSE APPLICATION
             out << "Bye!";
-            out.flush();
             break;
         }
         else {

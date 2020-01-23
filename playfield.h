@@ -8,13 +8,15 @@ class Playfield
 {
 public:
     Playfield();
-    void field_printer();
 
-private:
     QList<QStringList> field {};
 
-    void field_constructor();
-    void init_state();
+    void field_printer(QList<QStringList> field);
+
+private:
+    QList<QStringList> field_constructor(int field_size);
+
+
 
 };
 

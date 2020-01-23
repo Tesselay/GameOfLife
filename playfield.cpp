@@ -1,17 +1,15 @@
 #include "playfield.h"
 #include <QTextStream>
-#include <QDebug>
 #include <QProcess>
 
 Playfield::Playfield()
 {
-    field_constructor();
-    init_state();
+    field = field_constructor(25);
 }
 
-void Playfield::field_constructor() {
-    int field_size {25};
+QList<QStringList> Playfield::field_constructor(int field_size) {
 
+    QList<QStringList> field {};
     for ( int i {0}; i < field_size; i++) {
 
         QStringList row {};
@@ -20,13 +18,12 @@ void Playfield::field_constructor() {
         }
         field.append(row);
     }
+
+    return field;
 }
 
-void Playfield::field_printer() {
+void Playfield::field_printer(QList<QStringList> field) {
     QTextStream out(stdout);
-
-    QProcess::execute("cmd /c cls");
-
     for ( int i {0}; i < field.size(); i++) {
 
         for ( int j {0}; j < field[0].size(); j++) {
@@ -41,18 +38,4 @@ void Playfield::field_printer() {
 
 }
 
-void Playfield::init_state() {
-    int len_x {3};
-    int len_y {1};
 
-    int start_pos_x { (field[0].size() / 2) - (len_x / 2)};
-    int start_pos_y { (field.size() / 2) - (len_y / 2) };
-
-    for ( int i {0}; i < len_y; i++) {
-        for ( int j {0}; j < len_x; j++) {
-            field[start_pos_y+i][start_pos_x + j] = " X ";
-        }
-    }
-
-
-}
