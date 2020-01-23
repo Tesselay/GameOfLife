@@ -16,6 +16,7 @@ private:
     void initialize_field(QList<QStringList> field);
     void rules(QList<QStringList> field);
     QList<QList<int>> live_cell_finder(QList<QStringList> field);
+    int neighbour_finder(QList<int> location, QList<QStringList> field);
 };
 
 #endif // GAMELOGIC_H
