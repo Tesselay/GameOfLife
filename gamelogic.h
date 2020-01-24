@@ -2,7 +2,7 @@
 #define GAMELOGIC_H
 #include <QStringList>
 #include <QList>
-#include <playfield.h>
+#include "playfield.h"
 
 class GameLogic
 {
@@ -10,12 +10,15 @@ public:
     GameLogic();
     void next_step();
 
+    // Initialized public for access for the unit test
+    QString alive_cell {" X "};
+    QString dead_cell {"   "};
+    int field_size {50};
+
 private:
     Playfield play_field;
 
     QList<QStringList> field {};
-    QString alive_cell {" X "};
-    QString dead_cell {"   "};
     // Alive/dead cells of next round are saved in list to stage them for appliance after all calculations are done
     QList<QList<int>> next_round_alive {};
     QList<QList<int>> next_round_dead {};

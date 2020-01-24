@@ -5,7 +5,7 @@
 
 GameLogic::GameLogic()
 {
-    field = play_field.field_constructor(50);
+    field = play_field.field_constructor(field_size, dead_cell);
     initialize_field();
 }
 

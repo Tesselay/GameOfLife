@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(TestFieldPrinter LANGUAGES CXX)
+project(TestFieldConstructor LANGUAGES CXX)
 
 find_package(Qt5Test REQUIRED)
 
@@ -14,8 +14,9 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 enable_testing()
 
-add_executable(TestFieldPrinter tst_testfieldprinter.cpp)
-add_test(NAME TestFieldPrinter COMMAND TestFieldPrinter)
+add_executable(TestFieldConstructor tst_testfieldconstructor.cpp
+     "../gamelogic.cpp" "../playfield.cpp" "../utilities.cpp")
+add_test(NAME TestFieldConstructor COMMAND TestFieldConstructor)
 
-target_link_libraries(TestFieldPrinter PRIVATE Qt5::Test)
+target_link_libraries(TestFieldConstructor PRIVATE Qt5::Test)
 

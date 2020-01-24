@@ -7,7 +7,6 @@
 #include <QDebug>
 #include <QProcess>
 
-
 MainMenu::MainMenu()
 {
     main();
@@ -50,7 +49,6 @@ void MainMenu::main() {
             }
         }
         else if (user_input.toInt() == 2) {
-
         }
         else if (user_input.toInt() == 3) {
             // CLOSE APPLICATION

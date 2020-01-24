@@ -10,7 +10,7 @@ public:
     Playfield();
 
     void field_printer(QList<QStringList> field);
-    QList<QStringList> field_constructor(int field_size);
+    QList<QStringList> field_constructor(int field_size, QString dead_cell);
 
 
 

@@ -1,19 +1,18 @@
 #include "playfield.h"
 #include <QTextStream>
-#include <QProcess>
 
 Playfield::Playfield()
 {
 }
 
-QList<QStringList> Playfield::field_constructor(int field_size) {
+QList<QStringList> Playfield::field_constructor(int field_size, QString dead_cell) {
 
     QList<QStringList> field {};
     for ( int i {0}; i < field_size; i++) {
 
         QStringList row {};
         for ( int j {0}; j < field_size; j++) {
-            row.append("   ");
+            row.append(dead_cell);
         }
         field.append(row);
     }
