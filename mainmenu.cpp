@@ -41,7 +41,7 @@ void MainMenu::main() {
 
                 for ( int i {0}; i < 10; i++) {
                     game_logic.next_step();
-                    Utilities::delay(1);
+                    Utilities::delay(3);
                     Utilities::clear_screen();
                 }
                 break;

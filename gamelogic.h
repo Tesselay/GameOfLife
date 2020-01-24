@@ -12,11 +12,19 @@ public:
 
 private:
     Playfield play_field;
+    QList<QStringList> field {};
 
-    void initialize_field(QList<QStringList> field);
-    void rules(QList<QStringList> field);
-    QList<QList<int>> live_cell_finder(QList<QStringList> field);
-    int neighbour_finder(QList<int> location, QList<QStringList> field);
+    // Alive/dead cells of next round are saved in list to stage them for appliance after all calculations are done
+    QList<QList<int>> next_round_alive {};
+    QList<QList<int>> next_round_dead {};
+
+    void initialize_field();
+    void rules();
+    QList<QList<int>> live_cell_finder();
+    QList<QList<int>> dead_neighbour_finder(QList<QList<int>> live_cells);
+    int neighbour_finder(QList<int> location);
+    void cells_enliven(QList<QList<int>> next_round_alive);
+    void cells_kill(QList<QList<int>> next_round_dead);
 };
 
 #endif // GAMELOGIC_H

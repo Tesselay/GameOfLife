@@ -1,6 +1,7 @@
 #include "utilities.h"
 #include <QTime>
 #include <QProcess>
+#include <QDebug>
 
 Utilities::Utilities()
 {
@@ -22,4 +23,16 @@ void Utilities::clear_screen() {
     QProcess::execute("clear");
 
 #endif
+}
+
+QList<QList<int>> Utilities::remove_duplicates(QList<QList<int>> list) {
+    std::sort(list.begin(), list.end());
+    for ( int i {0}; i < list.size(); i++) {
+        while ( list.count(list[i]) > 1 ) {
+            list.removeAt(list.indexOf(list[i]));
+        }
+    }
+
+    return list;
+
 }

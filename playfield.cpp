@@ -4,7 +4,6 @@
 
 Playfield::Playfield()
 {
-    field = field_constructor(25);
 }
 
 QList<QStringList> Playfield::field_constructor(int field_size) {
