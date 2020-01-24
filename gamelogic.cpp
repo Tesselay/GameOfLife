@@ -17,25 +17,25 @@ void GameLogic::initialize_field() {
 //    field[12][9] = alive_cell;
 
     // Glider
-//    field[13][7] = alive_cell;
-//    field[13][8] = alive_cell;
-//    field[13][9] = alive_cell;
-//    field[12][9] = alive_cell;
-//    field[11][8] = alive_cell;
+    field[13][7] = alive_cell;
+    field[13][8] = alive_cell;
+    field[13][9] = alive_cell;
+    field[12][9] = alive_cell;
+    field[11][8] = alive_cell;
 
     // Exploder
-    field[22][12] = alive_cell;
-    field[22][14] = alive_cell;
-    field[22][16] = alive_cell;
-    field[23][12] = alive_cell;
-    field[23][16] = alive_cell;
-    field[24][12] = alive_cell;
-    field[24][16] = alive_cell;
-    field[25][12] = alive_cell;
-    field[25][16] = alive_cell;
-    field[26][12] = alive_cell;
-    field[26][14] = alive_cell;
-    field[26][16] = alive_cell;
+//    field[22][12] = alive_cell;
+//    field[22][14] = alive_cell;
+//    field[22][16] = alive_cell;
+//    field[23][12] = alive_cell;
+//    field[23][16] = alive_cell;
+//    field[24][12] = alive_cell;
+//    field[24][16] = alive_cell;
+//    field[25][12] = alive_cell;
+//    field[25][16] = alive_cell;
+//    field[26][12] = alive_cell;
+//    field[26][14] = alive_cell;
+//    field[26][16] = alive_cell;
 }
 
 void GameLogic::next_step() {

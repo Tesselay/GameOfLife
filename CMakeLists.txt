@@ -18,7 +18,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt5Core)
 
 add_executable(GameOfLife
-  main.cpp mainmenu.cpp playfield.cpp utilities.cpp gamelogic.cpp
+  main.cpp mainmenu.cpp playfield.cpp utilities.cpp gamelogic.cpp unittest.cpp
 )
 
 add_subdirectory(test)

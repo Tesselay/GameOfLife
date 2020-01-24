@@ -34,13 +34,12 @@ TestFieldConstructor::~TestFieldConstructor()
 
 void TestFieldConstructor::initTestCase()
 {
-    qDebug("Init");
     field_to_test = play_field.field_constructor(game_logic.field_size, game_logic.dead_cell);
 }
 
 void TestFieldConstructor::cleanupTestCase()
 {
-    qDebug("CleanUP");
+
 }
 
 void TestFieldConstructor::test_size()

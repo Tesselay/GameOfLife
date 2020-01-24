@@ -14,6 +14,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 enable_testing()
 
+
 add_executable(TestFieldConstructor tst_testfieldconstructor.cpp
      "../gamelogic.cpp" "../playfield.cpp" "../utilities.cpp")
 add_test(NAME TestFieldConstructor COMMAND TestFieldConstructor)

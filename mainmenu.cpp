@@ -40,9 +40,9 @@ void MainMenu::main() {
             GameLogic game_logic;
             while (true) {
 
-                for ( int i {0}; i < 20; i++) {
+                for ( int i {0}; i < 200; i++) {
                     game_logic.next_step();
-                    Utilities::delay(1);
+                    Utilities::delay(.1);
                     Utilities::clear_screen();
                 }
                 break;
