@@ -5,6 +5,8 @@
 #include <QTextStream>
 #include <QTime>
 #include <QDebug>
+#include <QProcess>
+
 
 MainMenu::MainMenu()
 {
@@ -20,7 +22,7 @@ void MainMenu::main() {
     out << banner << "\n";
     out.flush();
 
-    QString user_input {};      // Saved as String to prevent undefined behaviour when entering a string as input
+    QString user_input {};      // Saved as String to prevent undefined behaviour when entering a string as input for menu option
     while (user_input.toInt() != 3) {
 
         for( int i = 0; i < menu_points.size(); i++ ) {
@@ -48,7 +50,7 @@ void MainMenu::main() {
             }
         }
         else if (user_input.toInt() == 2) {
-            // UNIT TEST
+
         }
         else if (user_input.toInt() == 3) {
             // CLOSE APPLICATION
