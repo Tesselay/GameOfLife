@@ -12,8 +12,10 @@ public:
 
 private:
     Playfield play_field;
-    QList<QStringList> field {};
 
+    QList<QStringList> field {};
+    QString alive_cell {" X "};
+    QString dead_cell {"   "};
     // Alive/dead cells of next round are saved in list to stage them for appliance after all calculations are done
     QList<QList<int>> next_round_alive {};
     QList<QList<int>> next_round_dead {};
