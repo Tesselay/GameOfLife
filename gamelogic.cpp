@@ -1,12 +1,19 @@
 #include "gamelogic.h"
 
-#include <QDebug>
-
 GameLogic::GameLogic()
 {
     field = play_field.field_constructor(field_size, dead_cell);
     initialize_presets();
     initialize_field();
+
+    if (field.size() > 0 ) {
+        for ( int i {0}; i < 30; i++) {
+            next_step();
+            Utilities::delay(1);
+            Utilities::clear_screen();
+        }
+    }
+
 }
 
 void GameLogic::initialize_field() {
@@ -15,7 +22,7 @@ void GameLogic::initialize_field() {
 
     QString user_input {};
     int preset_amount {presets.size()};     // Saved as variable to save calculation time
-    while ( !( user_input.toInt() <= preset_amount && user_input.toInt() > 0 ) && user_input != 'x') {
+    while ( !( user_input.toInt() <= preset_amount && user_input.toInt() > 0 ) && user_input != 'x' && user_input != 'c') {
         out << "Choose one of the presets:\n";
         out.flush();
 
@@ -23,7 +30,7 @@ void GameLogic::initialize_field() {
             out << "[" << i+1 << "] " << preset_names.at(i) << "\n";
             out.flush();
         }
-        out << "[x] Custom pattern\n";
+        out << "[x] Custom pattern\n\n[c] Cancel\n";
         out.flush();
 
         out << "\n> ";
@@ -37,6 +44,9 @@ void GameLogic::initialize_field() {
             }
         } else if ( user_input.toLower() == 'x' ) {
             user_input = custom_pattern();
+        } else if ( user_input.toLower() == 'c') {
+            field.clear();      // Prevents simulation from running
+            Utilities::clear_screen();
         }
     }
 

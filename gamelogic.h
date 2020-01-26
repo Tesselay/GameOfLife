@@ -15,7 +15,7 @@ public:
 
     // Public for access from the unit test
     QString dead_cell {" _ "};
-    int field_size {25};
+    int field_size {40};
 
 private:
     Playfield play_field;

@@ -31,13 +31,6 @@ void MainMenu::main() {
         if (user_input.toInt() == 1) {
             // START
             GameLogic game_logic;
-
-            for ( int i {0}; i < 30; i++) {
-                game_logic.next_step();
-                Utilities::delay(1);
-                Utilities::clear_screen();
-            }
-
         }
         else if (user_input.toInt() == 2) {
             // UNIT TEST
