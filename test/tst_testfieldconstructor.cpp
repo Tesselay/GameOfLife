@@ -15,7 +15,6 @@ void TestFieldConstructor::initTestCase()
 
 void TestFieldConstructor::cleanupTestCase()
 {
-
 }
 
 void TestFieldConstructor::test_size()

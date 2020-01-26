@@ -43,6 +43,8 @@ void MainMenu::main() {
             // UNIT TEST
             TestFieldConstructor test1;
             QTest::qExec(&test1);
+            out << "\n\n\n";
+            out.flush();
         }
         else if (user_input.toInt() == 3) {
             // CLOSE APPLICATION

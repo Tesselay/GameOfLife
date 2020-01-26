@@ -14,8 +14,12 @@ Conway's game of life implemented as an qt console application.
 
 To-Do:
     
-    - Add custom preset-design capabilities for user
+    - Redo as QtGUIApplication
     - change running simulation to be a menu with buttons for: {Start, Stop, Step Forward, Cancel}
 
+Done:
+
+    - Added custom preset capabilities for the user
+
 @author Dominique Lahl
-@version 1.0 26/01/2019
+@version 1.1 26/01/2019

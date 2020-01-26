@@ -30,6 +30,7 @@ private:
 
     void initialize_field();
     void initialize_presets();
+    QString custom_pattern();       // Return is there for 'Cancel'-option to take back user to the preset menu
     void rules();
     QList<QList<int>> live_cell_finder();
     QList<QList<int>> dead_neighbour_finder(QList<QList<int>> live_cells);

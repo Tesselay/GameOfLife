@@ -1,5 +1,7 @@
 #include "gamelogic.h"
 
+#include <QDebug>
+
 GameLogic::GameLogic()
 {
     field = play_field.field_constructor(field_size, dead_cell);
@@ -13,7 +15,7 @@ void GameLogic::initialize_field() {
 
     QString user_input {};
     int preset_amount {presets.size()};     // Saved as variable to save calculation time
-    while ( !( user_input.toInt() <= preset_amount && user_input.toInt() > 0 ) ) {
+    while ( !( user_input.toInt() <= preset_amount && user_input.toInt() > 0 ) && user_input != 'x') {
         out << "Choose one of the presets:\n";
         out.flush();
 
@@ -21,6 +23,8 @@ void GameLogic::initialize_field() {
             out << "[" << i+1 << "] " << preset_names.at(i) << "\n";
             out.flush();
         }
+        out << "[x] Custom pattern\n";
+        out.flush();
 
         out << "\n> ";
         out.flush();
@@ -31,10 +35,50 @@ void GameLogic::initialize_field() {
             for ( int i {0}; i < presets.at(user_input.toInt() - 1).size(); i++ ) {
                 field[ presets[user_input.toInt() - 1][i][0] ][ presets[user_input.toInt() - 1][i][1] ] = alive_cell;       // '-1' since user choice begins at 1
             }
+        } else if ( user_input.toLower() == 'x' ) {
+            user_input = custom_pattern();
         }
     }
 
     Utilities::clear_screen();
+}
+
+QString GameLogic::custom_pattern() {
+    QTextStream in(stdin);
+    QTextStream out(stdout);
+
+    QString x {};
+    QString y {};
+    QString other_option {};
+    // saves for location of choosen cell for 'Undo'-option
+    int x_before {};
+    int y_before {};
+    while ( (x != 'f') && (x != 'c') ) {
+        play_field.field_printer(field);
+
+        out << "\nInput values for x (horizontal & menu-option) and y (vertical), e.g.: 'x y: 10 10' or 'x y: f f'\n[f] Finish\n[u] Undo\n[c] Cancel\n";
+        out.flush();
+        out << "x y: ";
+        out.flush();
+        in >> x >> y;
+
+        if ( (x.toInt() > 0 && x.toInt() < field.size()) && (y.toInt() > 0 && y.toInt() < field[0].size()) ){
+            field[x.toInt() - 1][y.toInt() - 1] = alive_cell;
+            x_before = x.toInt() - 1;
+            y_before = y.toInt() - 1;
+        } else if ( x.toLower() == 'f') {
+            Utilities::clear_screen();
+            return "x";
+        } else if ( x.toLower() == 'u') {
+            field[x_before][y_before] = dead_cell;
+        } else if ( x.toLower() == 'c') {
+            Utilities::clear_screen();
+            field = play_field.field_constructor(field_size, dead_cell);
+            return "n";
+        }
+        Utilities::clear_screen();
+
+    }
 }
 
 void GameLogic::initialize_presets() {
@@ -52,6 +96,8 @@ void GameLogic::initialize_presets() {
     preset_names.append("Exploder");
     presets.append(pulsator);
     preset_names.append("Pulsator");
+
+
 }
 
 void GameLogic::next_step() {

@@ -6,14 +6,13 @@
     @author Dominique Lahl
     @version 1.0 26/01/2019
 */
-
 #include "mainmenu.h"
 
 using namespace std;
 
 int main()
 {
-
+    system("MODE 650");
     MainMenu main_menu;
     return 1;
 }
