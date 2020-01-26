@@ -1,4 +1,4 @@
-GameOfLife
+# GameOfLife
 
 Project based on application-task at Governikus.
 
@@ -13,6 +13,7 @@ Description:
 Conway's game of life implemented as an qt console application.
 
 To-Do:
+    
     - Add custom preset-design capabilities for user
     - change running simulation to be a menu with buttons for: {Start, Stop, Step Forward, Cancel}
 
