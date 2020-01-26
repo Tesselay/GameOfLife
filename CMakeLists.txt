@@ -14,13 +14,16 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+enable_testing()
 
 find_package(Qt5Core)
+find_package(Qt5Test REQUIRED)
 
 add_executable(GameOfLife
-  main.cpp mainmenu.cpp playfield.cpp utilities.cpp gamelogic.cpp unittest.cpp
+  main.cpp mainmenu.cpp playfield.cpp utilities.cpp gamelogic.cpp "test/tst_testfieldconstructor.cpp"
 )
+add_test(NAME TestFieldConstructor COMMAND TestFieldConstructor)
 
 add_subdirectory(test)
 
-target_link_libraries(GameOfLife Qt5::Core)
+target_link_libraries(GameOfLife Qt5::Core Qt5::Test)

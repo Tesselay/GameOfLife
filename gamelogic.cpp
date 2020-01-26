@@ -1,41 +1,57 @@
 #include "gamelogic.h"
-#include "playfield.h"
-#include "utilities.h"
-#include <QDebug>
 
 GameLogic::GameLogic()
 {
     field = play_field.field_constructor(field_size, dead_cell);
+    initialize_presets();
     initialize_field();
 }
 
 void GameLogic::initialize_field() {
+    QTextStream in(stdin);
+    QTextStream out(stdout);
 
-    // Blinker
-//    field[12][7] = alive_cell;
-//    field[12][8] = alive_cell;
-//    field[12][9] = alive_cell;
+    QString user_input {};
+    int preset_amount {presets.size()};     // Saved as variable to save calculation time
+    while ( !( user_input.toInt() <= preset_amount && user_input.toInt() > 0 ) ) {
+        out << "Choose one of the presets:\n";
+        out.flush();
 
-    // Glider
-    field[13][7] = alive_cell;
-    field[13][8] = alive_cell;
-    field[13][9] = alive_cell;
-    field[12][9] = alive_cell;
-    field[11][8] = alive_cell;
+        for ( int i {0}; i < preset_amount; i++) {
+            out << "[" << i+1 << "] " << preset_names.at(i) << "\n";
+            out.flush();
+        }
 
-    // Exploder
-//    field[22][12] = alive_cell;
-//    field[22][14] = alive_cell;
-//    field[22][16] = alive_cell;
-//    field[23][12] = alive_cell;
-//    field[23][16] = alive_cell;
-//    field[24][12] = alive_cell;
-//    field[24][16] = alive_cell;
-//    field[25][12] = alive_cell;
-//    field[25][16] = alive_cell;
-//    field[26][12] = alive_cell;
-//    field[26][14] = alive_cell;
-//    field[26][16] = alive_cell;
+        out << "\n> ";
+        out.flush();
+        in >> user_input;
+        in.flush();
+
+        if ( user_input.toInt() <= preset_amount && user_input.toInt() > 0 ) {
+            for ( int i {0}; i < presets.at(user_input.toInt() - 1).size(); i++ ) {
+                field[ presets[user_input.toInt() - 1][i][0] ][ presets[user_input.toInt() - 1][i][1] ] = alive_cell;       // '-1' since user choice begins at 1
+            }
+        }
+    }
+
+    Utilities::clear_screen();
+}
+
+void GameLogic::initialize_presets() {
+
+    QList<QList<int>> blinker {{12,7},{12,8},{12,9}};
+    QList<QList<int>> glider {{22,7},{22,8},{22,9},{21,9},{20,8}};
+    QList<QList<int>> exploder {{12,12},{12,14},{12,16},{13,12},{13,16},{14,12},{14,16},{15,12},{15,16},{16,12},{16,14},{16,16}};
+    QList<QList<int>> pulsator {{12,7},{12,8},{12,9},{12,10},{12,11},{12,12},{12,13},{12,14},{12,15},{12,16},{12,17}};
+
+    presets.append(blinker);
+    preset_names.append("Blinker");
+    presets.append(glider);
+    preset_names.append("Glider");
+    presets.append(exploder);
+    preset_names.append("Exploder");
+    presets.append(pulsator);
+    preset_names.append("Pulsator");
 }
 
 void GameLogic::next_step() {
@@ -88,6 +104,8 @@ QList<QList<int>> GameLogic::dead_neighbour_finder(QList<QList<int>> live_cells)
                 int pos_checked_x {pos_start_x - 1 + j};
                 int pos_checked_y {pos_start_y - 1 + k};
 
+                std::tie(pos_checked_x, pos_checked_y) = boundary_overstep(pos_checked_x, pos_checked_y);
+
                 if ( field[pos_checked_x][pos_checked_y] == dead_cell) {
                     QList<int> cell_location {};
                     cell_location.append(pos_checked_x);
@@ -98,9 +116,33 @@ QList<QList<int>> GameLogic::dead_neighbour_finder(QList<QList<int>> live_cells)
         }
     }
 
-
-
     return dead_cells;
+}
+
+int GameLogic::neighbour_finder(QList<int> cell_location) {
+
+    int pos_start_x {cell_location.at(0)};
+    int pos_start_y {cell_location.at(1)};
+
+    int alive_neighbours {0};
+    if (field[pos_start_x][pos_start_y] == alive_cell) {
+        alive_neighbours = -1;  // Set to '-1' if own state is ALIVE, since the following loop checks the complete 3x3 square and not only the neighbours of the cell
+    }
+
+    for ( int i {0}; i < 3; i++) {
+        for ( int j {0}; j < 3; j++) {
+            int pos_checked_x {pos_start_x - 1 + i};
+            int pos_checked_y {pos_start_y - 1 + j};
+
+            std::tie(pos_checked_x, pos_checked_y) = boundary_overstep(pos_checked_x, pos_checked_y);
+
+            if ( field[pos_checked_x][pos_checked_y] == alive_cell) {
+                alive_neighbours++;
+            }
+        }
+    }
+
+    return alive_neighbours;
 }
 
 QList<QList<int>> GameLogic::live_cell_finder() {
@@ -120,28 +162,22 @@ QList<QList<int>> GameLogic::live_cell_finder() {
     return live_cells;
 }
 
-int GameLogic::neighbour_finder(QList<int> cell_location) {
+std::tuple<int, int> GameLogic::boundary_overstep(int pos_x, int pos_y) {
 
-    int pos_start_x {cell_location.at(0)};
-    int pos_start_y {cell_location.at(1)};
-
-    int alive_neighbours {0};
-    if (field[pos_start_x][pos_start_y] == alive_cell) {
-        alive_neighbours = -1;  // Set to '-1' if own state is ALIVE, since the following loop checks the complete 3x3 square and not only the neighbours of the cell
+    if ( pos_x < 0  ) {
+        pos_x = pos_x + (field.size());
+    } else if ( pos_x >= field.size() ) {
+        pos_x = (field.size()) - pos_x;
     }
 
-    for ( int i {0}; i < 3; i++) {
-        for ( int j {0}; j < 3; j++) {
-            int pos_checked_x {pos_start_x - 1 + i};
-            int pos_checked_y {pos_start_y - 1 + j};
-            if ( field[pos_checked_x][pos_checked_y] == alive_cell) {
-                alive_neighbours++;
-            }
-
-        }
+    if ( pos_y < 0 ) {
+        pos_y = pos_y + (field[pos_x].size());
+    } else if (pos_y >= field[pos_x].size() ) {
+        pos_y = (field[pos_x].size()) - pos_y;
     }
 
-    return alive_neighbours;
+    return std::make_tuple(pos_x, pos_y);
+
 }
 
 void GameLogic::cells_enliven(QList<QList<int>> next_round_alive) {

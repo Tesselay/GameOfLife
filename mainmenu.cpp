@@ -7,6 +7,9 @@
 #include <QDebug>
 #include <QProcess>
 
+#include <QTest>
+#include "test/tst_testfieldconstructor.h"
+
 MainMenu::MainMenu()
 {
     main();
@@ -33,26 +36,28 @@ void MainMenu::main() {
         out.flush();
 
         in >> user_input;
+        in.flush();
 
         Utilities::clear_screen();
         if (user_input.toInt() == 1) {
             // START
             GameLogic game_logic;
-            while (true) {
 
-                for ( int i {0}; i < 200; i++) {
-                    game_logic.next_step();
-                    Utilities::delay(.1);
-                    Utilities::clear_screen();
-                }
-                break;
+            for ( int i {0}; i < 60; i++) {
+                game_logic.next_step();
+                Utilities::delay(1);
+                Utilities::clear_screen();
             }
+
         }
         else if (user_input.toInt() == 2) {
+            // UNIT TEST
+            TestFieldConstructor test1;
+            QTest::qExec(&test1);
         }
         else if (user_input.toInt() == 3) {
             // CLOSE APPLICATION
-            out << "Bye!";
+            out << "Bye!\n";
             break;
         }
         else {
