@@ -68,6 +68,7 @@ void GameLogic::rules() {
 
     QList<QList<int>> live_cells = live_cell_finder();
     for ( int i {0}; i < live_cells.size(); i++) {
+        // Applies rules to all alive cells and either marks them for alive or dead
         if ( neighbour_finder(live_cells[i]) == 2 || neighbour_finder(live_cells[i]) == 3) {
             next_round_alive.append(live_cells[i]);
         } else {
@@ -77,6 +78,7 @@ void GameLogic::rules() {
 
     QList<QList<int>> dead_cells = dead_neighbour_finder(live_cells);
     for ( int i {0}; i < dead_cells.size(); i++) {
+        // Applies rules to all dead cells neighbour to alive cells and either marks them for alive or dead
         if ( neighbour_finder(dead_cells[i]) == 3) {
             next_round_alive.append(dead_cells[i]);
         } else {
@@ -93,16 +95,20 @@ QList<QList<int>> GameLogic::dead_neighbour_finder(QList<QList<int>> live_cells)
        a method to find and delete duplicates, which most likely will still be faster than just checking every
        dead cell. */
 
+    int pos_start_x {};
+    int pos_start_y {};
+    int pos_checked_x {};
+    int pos_checked_y {};
     QList<QList<int>> dead_cells {};
     for ( int i {0}; i < live_cells.size(); i++) {
-        int pos_start_x {live_cells[i].at(0)};
-        int pos_start_y {live_cells[i].at(1)};
+        pos_start_x = live_cells[i].at(0);
+        pos_start_y = live_cells[i].at(1);
 
         for ( int j {0}; j < 3; j++) {
             for ( int k {0}; k < 3; k++) {
                 // Points at every position of an 3x3 grid around corresponding live cell (including live cell)
-                int pos_checked_x {pos_start_x - 1 + j};
-                int pos_checked_y {pos_start_y - 1 + k};
+                pos_checked_x = pos_start_x - 1 + j;
+                pos_checked_y = pos_start_y - 1 + k;
 
                 std::tie(pos_checked_x, pos_checked_y) = boundary_overstep(pos_checked_x, pos_checked_y);
 
@@ -129,10 +135,12 @@ int GameLogic::neighbour_finder(QList<int> cell_location) {
         alive_neighbours = -1;  // Set to '-1' if own state is ALIVE, since the following loop checks the complete 3x3 square and not only the neighbours of the cell
     }
 
+    int pos_checked_x {};
+    int pos_checked_y {};
     for ( int i {0}; i < 3; i++) {
         for ( int j {0}; j < 3; j++) {
-            int pos_checked_x {pos_start_x - 1 + i};
-            int pos_checked_y {pos_start_y - 1 + j};
+            pos_checked_x = pos_start_x - 1 + i;
+            pos_checked_y = pos_start_y - 1 + j;
 
             std::tie(pos_checked_x, pos_checked_y) = boundary_overstep(pos_checked_x, pos_checked_y);
 

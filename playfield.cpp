@@ -1,5 +1,4 @@
 #include "playfield.h"
-#include <QTextStream>
 
 Playfield::Playfield()
 {

@@ -34,7 +34,7 @@ void MainMenu::main() {
 
             for ( int i {0}; i < 30; i++) {
                 game_logic.next_step();
-                Utilities::delay(10);
+                Utilities::delay(1);
                 Utilities::clear_screen();
             }
 

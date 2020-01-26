@@ -13,11 +13,8 @@ Description:
 Conway's game of life implemented as an qt console application.
 
 To-Do:
-    - Add cells-preset design capabilities for user
-    - Fullscreen and center application
-    - Code Optimization
-    - Comments
-
+    - Add custom preset-design capabilities for user
+    - change running simulation to be a menu with buttons for: {Start, Stop, Step Forward, Cancel}
 
 @author Dominique Lahl
 @version 1.0 26/01/2019

@@ -1,7 +1,4 @@
 #include "utilities.h"
-#include <QTime>
-#include <QProcess>
-#include <QDebug>
 
 Utilities::Utilities()
 {
