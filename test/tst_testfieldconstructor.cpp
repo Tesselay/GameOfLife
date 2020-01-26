@@ -1,4 +1,3 @@
-#include <QtTest/QtTest>
 #include "tst_testfieldconstructor.h"
 
 TestFieldConstructor::TestFieldConstructor()

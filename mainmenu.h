@@ -2,7 +2,13 @@
 #define MAINMENU_H
 #include <QString>
 #include <QStringList>
+#include <QTextStream>
+#include <QTime>
+#include <QTest>
 #include <vector>
+#include "test/tst_testfieldconstructor.h"
+#include "gamelogic.h"
+#include "utilities.h"
 
 class MainMenu
 {

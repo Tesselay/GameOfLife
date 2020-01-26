@@ -2,7 +2,7 @@
 #define PLAYFIELD_H
 #include <QList>
 #include <QStringList>
-
+#include <QTextStream>
 
 class Playfield
 {
@@ -11,8 +11,6 @@ public:
 
     void field_printer(QList<QStringList> field);
     QList<QStringList> field_constructor(int field_size, QString dead_cell);
-
-
 
 };
 

@@ -42,7 +42,7 @@ void GameLogic::initialize_presets() {
     QList<QList<int>> blinker {{12,7},{12,8},{12,9}};
     QList<QList<int>> glider {{22,7},{22,8},{22,9},{21,9},{20,8}};
     QList<QList<int>> exploder {{12,12},{12,14},{12,16},{13,12},{13,16},{14,12},{14,16},{15,12},{15,16},{16,12},{16,14},{16,16}};
-    QList<QList<int>> pulsator {{12,7},{12,8},{12,9},{12,10},{12,11},{12,12},{12,13},{12,14},{12,15},{12,16},{12,17}};
+    QList<QList<int>> pulsator {{12,7},{12,8},{12,9},{12,10},{12,11},{12,12},{12,13},{12,14},{12,15},{12,16}};
 
     presets.append(blinker);
     preset_names.append("Blinker");

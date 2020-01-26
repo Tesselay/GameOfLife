@@ -1,14 +1,4 @@
 #include "mainmenu.h"
-#include "gamelogic.h"
-#include "utilities.h"
-#include <QString>
-#include <QTextStream>
-#include <QTime>
-#include <QDebug>
-#include <QProcess>
-
-#include <QTest>
-#include "test/tst_testfieldconstructor.h"
 
 MainMenu::MainMenu()
 {
@@ -36,16 +26,15 @@ void MainMenu::main() {
         out.flush();
 
         in >> user_input;
-        in.flush();
 
         Utilities::clear_screen();
         if (user_input.toInt() == 1) {
             // START
             GameLogic game_logic;
 
-            for ( int i {0}; i < 60; i++) {
+            for ( int i {0}; i < 30; i++) {
                 game_logic.next_step();
-                Utilities::delay(1);
+                Utilities::delay(10);
                 Utilities::clear_screen();
             }
 
